@@ -31,6 +31,7 @@ if image_file:
     st.image(image_file.getvalue())
 
 if image_file is not None:
+    ModelScript=ModelScript()
     model=ModelScript.load_model()
     with st.spinner("Please wait..."):
         image=  ModelScript.preprocessing(image_file.getvalue())

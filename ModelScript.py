@@ -14,15 +14,14 @@ class ModelScript:
         self.input_shape=(400,400)
 
     @st.cache(allow_output_mutation=True)    
-    def Net(self,model_name='b3',output=9):
+    def Net(model_name='b3',output=9):
         model=EfficientNet.from_pretrained(f'efficient-{model_name}') 
         model._fc=nn.Linear(in_features=model._fc.in_features,out_features=output,bias=True) 
         return model
-
+ 
     def load_model(self):
         model=ModelScript.Net()
-        model.load_state_dict(torch.load(self.model_path,
-        map_location=torch.device('cpu'))["model_state_dict"])    
+        model.load_state_dict(torch.load(self.model_path,map_location=torch.device('cpu'))["model_state_dict"])
         model.eval()
         return model
 
