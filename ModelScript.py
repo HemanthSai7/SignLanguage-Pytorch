@@ -35,7 +35,7 @@ class ModelScript:
         return image
 
     def predict(self,image,model):
-        image=self.unsqueeze(0)
+        image=image.unsqueeze(0)
         pred=model(image)
         print(pred)
         pred=nn.functional.softmax(pred,dim=1).data.cpu().numpy().argmax()
