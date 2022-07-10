@@ -11,7 +11,7 @@ class Config:
 class ModelScript:
     def __init__(self):
         self.model_path=f'{Config.DIR}/sign_model.pt'
-        self.input_shape=(400,400)
+        self.input_shape=(128,128)
 
     @st.cache(allow_output_mutation=True)    
     def Net(model_name='b3',output=9):
