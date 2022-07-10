@@ -39,4 +39,4 @@ if image_file is not None:
         st.balloons()
     st.success(f"Prediction:{LABEL_DICT[prediction]}")
 else:
-    st.sidebar.warning("Please upload or capture an image")                      
+    st.sidebar.warning("Please upload or capture an image")

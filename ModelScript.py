@@ -9,14 +9,13 @@ class Config:
     DIR='/models'
 
 class ModelScript:
-    def __init__(self,input_shape,model_name):
+    def __init__(self):
         self.model_path=f'{Config.DIR}/sign_model.pt'
-        self.input_shape=input_shape
-        self.model_name=model_name
+        self.input_shape=(400,400)
 
     @st.cache(allow_output_mutation=True)    
-    def Net(self,output=9):
-        model=EfficientNet.from_pretrained(f'efficient-{self.model_name}') 
+    def Net(self,model_name='b3',output=9):
+        model=EfficientNet.from_pretrained(f'efficient-{model_name}') 
         model._fc=nn.Linear(in_features=model._fc.in_features,out_features=output,bias=True) 
         return model
 
