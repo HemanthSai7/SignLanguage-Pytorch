@@ -26,4 +26,8 @@ Streamlit is the easiest way especially for people with no front-end knowledge t
 ![image](https://img.shields.io/badge/Streamlit-EA6566?style=for-the-badge&logo=streamlit&logoColor=white)
 ![image](https://img.shields.io/badge/PyTorch-D04139?style=for-the-badge&logo=pytorch&logoColor=white)
 
+## Dataset Used
+Dataset can be founded on the Zindi Competitions page.
+[Dataset](https://zindi.africa/competitions/kenyan-sign-language-classification-challenge/data)
+
 
