@@ -15,7 +15,7 @@ class ModelScript:
         self.model_name=model_name
 
     @st.cache(allow_output_mutation=True)    
-    def Net(self,output=10):
+    def Net(self,output=9):
         model=EfficientNet.from_pretrained(f'efficient-{self.model_name}') 
         model._fc=nn.Linear(in_features=model._fc.in_features,out_features=output,bias=True) 
         return model
