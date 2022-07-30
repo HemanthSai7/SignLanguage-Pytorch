@@ -15,7 +15,6 @@ from tqdm.notebook import tqdm
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset
-import torchvision.datasets as datasets
 
 from efficientnet_pytorch import EfficientNet
 
