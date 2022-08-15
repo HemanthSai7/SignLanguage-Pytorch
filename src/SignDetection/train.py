@@ -1,50 +1,23 @@
-import os
-import math
-import json
-import random
-from pathlib import Path
-
-import numpy as np
 import pandas as pd
 
 import torch
+from catalyst.data.sampler import BalanceClassSampler
+from torch.utils.data.sampler import SequentialSampler
 
 from dataloader import DatasetRetriever
 from augmentations import train_augmentations,validation_augumentations
 from train_config import Config
-from utils import get_dataset
+from utils.get_dataset import convert
+from StratifiedKFold import data_split_StratifiedKFold
 from model import Net
 from engine import Train
 
-from catalyst.data.sampler import BalanceClassSampler
-from torch.utils.data.sampler import SequentialSampler
-from sklearn.model_selection import StratifiedKFold
-
 #Get Dataset
 df=pd.read_csv("./datasets/Train.csv")
-
-def convert(df): #Convert the dataframe to a list of dictionaries
-    SignDict={"Seat":0,"Enough/Satisfied":1,"Mosque":2,"Temple":3,"Friend":4,"Me":5,"Church":6,"You":7,"Love":8}
-    df['Label']=df['Label'].apply(lambda x:SignDict[str(x)])
-    return df['Label']
-convert(df)
+df=convert(df)
 
 #Stratified KFold Split
-base_dir = Path('datasets')
-train_df = df
-with open(f'../input/signlanguage/datasets/label_num_to_sign_map.json') as f:
-    class_names = json.loads(f.read())
-f.close() 
-
-train_df['label_name'] = train_df['Label'].apply(lambda x: class_names[str(x)])
-
-sk = StratifiedKFold(n_splits=4, random_state=42, shuffle=True)
-for fold, (train, val) in enumerate(sk.split(train_df, train_df['Label'])):
-    train_df.loc[val, 'fold'] = fold
-train_df.fold = train_df.fold.astype(int)
-print(train_df.fold.value_counts())
-print(train_df[train_df['fold']==0].img_IDS.values)
-
+train_df = data_split_StratifiedKFold(df)
 
 #trainig and validation
 def test(fold_number=0,model_name='b3',image_size=512,weight_path='./',load_weights_path=None):

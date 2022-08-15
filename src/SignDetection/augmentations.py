@@ -4,20 +4,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from SignDetection.dataloader import DatasetRetriever
+from utils.get_dataset import convert 
 
 #Read the datasets
 df=pd.read_csv("./datasets/Train.csv")
+df=convert(df)
 
-def convert(df): #Convert the dataframe to a list of dictionaries
-    SignDict={"Seat":0,"Enough/Satisfied":1,"Mosque":2,"Temple":3,"Friend":4,"Me":5,"Church":6,"You":7,"Love":8}
-    df['Label']=df['Label'].apply(lambda x:SignDict[str(x)])
-    return df['Label']
-convert(df)
-
-#EDA
-print(df.shape)
-print(df['Label'].value_counts())
-
+#Augmentations for training
 def train_augmentations(img_size=512):
     return A.Compose([
         A.Resize(height=img_size, width=img_size, p=1),
@@ -31,13 +24,14 @@ def train_augmentations(img_size=512):
         ToTensorV2(p=1.0),
     ], p=1.0)
 
-
+#Augmentations for validation
 def validation_augumentations(img_size=512):
     return A.Compose([
         A.Resize(height=img_size, width=img_size, p=1.0),
         ToTensorV2(p=1.0),
     ], p=1.0)
 
+#Visualize the augmentation
 obj = DatasetRetriever(df.img_IDS.values, df.Label.values,
                        validation_augumentations())
 images, labels = obj[6003]
