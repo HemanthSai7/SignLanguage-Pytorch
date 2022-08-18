@@ -33,5 +33,3 @@ Streamlit is the easiest way especially for people with no front-end knowledge t
 ## Dataset Used
 Dataset can be founded on the Zindi Competitions page.
 [Dataset](https://zindi.africa/competitions/kenyan-sign-language-classification-challenge/data)
-
-
