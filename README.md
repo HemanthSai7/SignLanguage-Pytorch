@@ -18,7 +18,19 @@ Streamlit is the easiest way especially for people with no front-end knowledge t
 - Data caching simplifies and speeds up computation pipelines.
 
 ## Repository Breakdown
+### src Directory
+---
+`src/SignDetection/StratifiedKFold.py` - This file contains the code for the StratifiedKFold class which is used to split the data into train and validation sets.
+`src/SignDetection/augmentations.py` - Contains the image augmentation functions.
+`src/SignDetection/datloader.py` - Contains the code for the dataloader class.
+`src/SignDetection/engine.py` - Contains the code for the training and validation functions.
+`src/SignDetection/model.py` - Contains the code for the model. 
+`src/SignDetection/train.py` - Contains the code for the training loop.
+`src/SignDetection/train_config.py` - Contains the code for the training configuration.
 
+### utils Directory
+---
+`src/utils/get_dataset.py` - contains the code for encoding the dataset classes.
 
 ## Tech Stack Used
 ![image](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
